@@ -1,2 +1,25 @@
-We present some samples for phase retrieval using Maximum a posteriori (MAP).
-The construction of this repository is not finished yet and will be continuously updated. 
+# MAP for Phase Retrieval
+
+This repository provides MATLAB examples for phase retrieval from a maximum
+a posteriori (MAP) perspective. It accompanies the review paper *Recovering
+phase from intensity: an inference view*.
+
+## Modules
+
+- `likelihood`: Forward losses and backward gradients for Gaussian,
+  Poisson, robust, and variance-stabilized measurement models.
+- `Fourier ptychography`: Five local FPM reconstruction algorithms,
+  simulation benchmarks, experimental examples, and a reference to the
+  external APIC library.
+- `Ptychography`: Conventional rPIE and automatic-differentiation
+  implementations for scanning coherent diffraction imaging.
+- `Multi-distance inline holography`: Angular-spectrum simulation and
+  sequential, global-backpropagation, and random-layer reconstruction.
+- `regularization`: Example priors and optimization routines.
+
+See `likelihood/README.md` for the likelihood API, supported models, and a
+numerical gradient test.
+
+## License
+
+This project is released under the MIT License. See `LICENSE`.
