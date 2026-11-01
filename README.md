@@ -54,6 +54,7 @@ combined into a reconstruction pipeline.
 | --- | --- | --- |
 | Likelihood models | Gaussian intensity/amplitude/gamma, Poisson, Anscombe, Poisson-Gaussian, Laplace, Hyper-Laplacian, Huber | [`likelihood_forward.m`](likelihood/likelihood_forward.m), [`likelihood_backward.m`](likelihood/likelihood_backward.m) |
 | Priors and constraints | L2, smooth L1, gradient L2, TV, gradient Hyper-Laplacian, Hessian L2, Hessian-TV, L0/L1 proximal operators, support and magnitude constraints | [`regularization_forward.m`](regularization/regularization_forward.m), [`regularization_project.m`](regularization/regularization_project.m) |
+| Plug-and-play prior | Inline-holography PnP-ADMM, PnP-FISTA, and RED with complex TV denoising | [`plug-and-play prior`](plug-and-play%20prior/README.md) |
 | Fourier phase retrieval | Hybrid Input-Output and Difference Map | [`hio_phase_retrieval.m`](Fourier%20spectrum%20phase%20retrieval/hio_phase_retrieval.m), [`difference_map_phase_retrieval.m`](Fourier%20spectrum%20phase%20retrieval/difference_map_phase_retrieval.m) |
 | Multi-distance inline holography | Sequential layer-wise projection, global backpropagation, random-layer backpropagation | [`reconstruct_sequential_layers.m`](Multi-distance%20inline%20holography/reconstruct_sequential_layers.m), [`reconstruct_global_backprop.m`](Multi-distance%20inline%20holography/reconstruct_global_backprop.m) |
 | Scanning ptychography | rPIE and automatic differentiation with complex Adam | [`ptycho_reconstruct_rpie.m`](Ptychography/ptycho_reconstruct_rpie.m), [`ptycho_reconstruct_autodiff.m`](Ptychography/ptycho_reconstruct_autodiff.m) |
@@ -100,6 +101,16 @@ object = regularization_prox(object, "l1", 0.01);
 object = regularization_project(object, "support", mask=support);
 object = regularization_project(object, "magnitude_bounds", ...
     minimum=0, maximum=1);
+```
+
+## Plug-and-Play Priors
+
+The [`plug-and-play prior`](plug-and-play%20prior/README.md) module provides
+PnP-ADMM, PnP-FISTA, and RED for single-distance inline holography:
+
+```matlab
+[object, error] = pnp_admm_inline( ...
+    intensity, distance, wavelength, pixelSize, 100, 0.01);
 ```
 
 ## Fourier Spectrum Phase Retrieval
@@ -187,6 +198,7 @@ Run the compact numerical tests:
 ```matlab
 test_likelihood_gradients
 test_regularization_gradients
+test_pnp_inline
 test_fourier_spectrum_phase_retrieval
 test_multidistance_inline_holography
 test_ptychography
@@ -197,6 +209,7 @@ Run the visual demonstrations:
 ```matlab
 demo_likelihood
 demo_regularization
+demo_pnp_inline
 demo_fourier_spectrum_phase_retrieval
 demo_multidistance_inline_holography
 demo_ptychography
@@ -220,6 +233,7 @@ multi-distance algorithms run on CPU.
 map-for-phase-retrieval/
 |-- likelihood/
 |-- regularization/
+|-- plug-and-play prior/
 |-- Fourier spectrum phase retrieval/
 |-- Multi-distance inline holography/
 |-- Ptychography/
@@ -238,6 +252,7 @@ The repository includes:
 
 - centered finite-difference checks for likelihood gradients;
 - centered finite-difference checks for regularization gradients;
+- finite-value and TV-reduction tests for plug-and-play reconstruction;
 - a finite-difference check for the differentiable ptychography operator;
 - angular-spectrum forward/backward round-trip tests;
 - reconstruction smoke tests for HIO, Difference Map, rPIE, automatic
