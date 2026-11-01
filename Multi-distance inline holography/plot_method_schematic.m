@@ -99,7 +99,6 @@ draw_box(panelX(3)+0.07, 0.13, 0.15, 0.06, "Stochastic update", [0.88, 0.93, 1])
 add_arrow([panelX(3)+0.145, 0.49], [panelX(3)+0.145, 0.43]);
 add_arrow([panelX(3)+0.145, 0.37], [panelX(3)+0.145, 0.31]);
 add_arrow([panelX(3)+0.145, 0.25], [panelX(3)+0.145, 0.19]);
-add_arrow([panelX(3)+0.145, 0.13], [panelX(3)+0.145, 0.07]);
 annotation("textbox", [panelX(3)+0.025, 0.085, 0.24, 0.03], ...
     "String", "low cost per iteration; noisy trajectory", "EdgeColor", "none", ...
     "HorizontalAlignment", "center", "FontSize", 10, "Color", colors{3});
